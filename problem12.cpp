@@ -26,8 +26,8 @@ number to have over five hundred divisors?
 answer : 76576500
 */
 
-#include<iostream>
-#include<vector>
+#include <iostream>
+#include <vector>
 #include <stdio.h>
 
 
