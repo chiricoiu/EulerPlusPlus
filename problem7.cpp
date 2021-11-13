@@ -6,8 +6,10 @@ What is the 10 001st prime number?
 answer : 104743
 */
 
-#include<iostream>
-#include<vector>
+#include <iostream>
+#include <chrono>
+
+#include <vector>
 
 bool isPrime(int n)
 {
@@ -48,6 +50,10 @@ int umpteenthPrime(int n)
 
 int main()
 {
+    auto t0 = std::chrono::high_resolution_clock::now();
     std::cout << umpteenthPrime(10001) << std::endl;
+    auto t1 = std::chrono::high_resolution_clock::now();
+    std::cout << "solved in: " << std::chrono::duration_cast<std::chrono::milliseconds>(t1-t0).count() << " msec" << std::endl;
     return 0;
+    
 }

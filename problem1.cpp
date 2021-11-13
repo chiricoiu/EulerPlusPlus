@@ -8,6 +8,7 @@ answer : 233168
 */
 
 #include <iostream>
+#include <chrono>
 
 int sumMultiple(int n)
 {
@@ -25,7 +26,10 @@ int sumMultiple(int n)
 
 int main()
 {
+    auto t0 = std::chrono::high_resolution_clock::now();
     std::cout << sumMultiple(1000) << std::endl;
+    auto t1 = std::chrono::high_resolution_clock::now();
+    std::cout << "solved in: " << std::chrono::duration_cast<std::chrono::milliseconds>(t1-t0).count() << " msec" << std::endl;
     return 0;
 }
 

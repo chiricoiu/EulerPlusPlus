@@ -1,61 +1,79 @@
 /*
 Work out the first ten digits of the sum of the following one-hundred 
 50-digit numbers
+
+result : 5537376230
 */
 
 #include <iostream>
-#include <fstream>
-#include <string>
-#include <vector>
-#include <cstring>
-#include <stdlib.h>
+#include <chrono>
 
-std::vector<std::string> readDigits()
+#include <fstream>
+#include <vector>
+using std::vector;
+
+vector<vector<int>> readDigits(int nrows, int ncols)
 {
+    vector<vector<int>> matrix(nrows, vector<int>(ncols, 0));
     std::fstream txtfile;
-    std::vector<std::string> fileContent;
-    txtfile.open("listDigits.txt", std::ios::in);
+    txtfile.open("data/problem13/listDigits.txt", std::ios::in);
     // To open the file in reading mode - ios::in
     // To open the file in writing mode - ios::out
     if (txtfile.is_open())
     {
+        int num_line = 0;
         std::string line;
         while (std::getline(txtfile, line))
         {
-            fileContent.push_back(line);
+            int i = 0;
+            for (auto digit : line)
+            {
+                matrix[num_line][i] = digit - '0';
+                i++;
+            }
+            num_line++;            
         }
     }
     txtfile.close();
-    return fileContent;
+    return matrix;
 }
 
-std::vector<int> sumDigits(std::vector<std::string> listDigits)
+vector<int> sumDigits(vector<vector<int>> matrixDigits)
 {
-    std::vector<int> result;
-    int additional = 0;
-    for (int i = 1; i < 50; i++)
+    vector<int> digitcol(50, 0);
+    int div = 0;
+    for (int j = matrixDigits[0].size() - 1; j >= 0; j--)
     {
-        int sum = additional;
-        for (auto digits : listDigits)
+        int sumcol = div;
+        for (int i = 0; i < matrixDigits.size(); i++)
         {
-            sum += std::stoi(std::string(1, digits[digits.size() - i]), nullptr, 10);
+            sumcol += matrixDigits[i][j];
         }
-        if (i == 49)
+        div = sumcol / 10;
+        
+        if (j == 0)
         {
-            result.insert(result.begin(), sum);
+            digitcol[j] = sumcol;
         }
         else
         {
-            result.insert(result.begin(), sum % 10);
-            additional = sum / 10;
-        } 
+            digitcol[j] = sumcol % 10;
+        }
     }
-    return result;
+    return digitcol;
 }
 
 int main()
 {
-    std::vector<int> v = sumDigits(readDigits());
-    std::cout << v[0] << v[1] << v[2] << v[3] << v[4] << v[5] << v[6] << v[7] << std::endl;
+    auto t0 = std::chrono::high_resolution_clock::now();    
+    vector<vector<int>> matrix = readDigits(100, 50);
+    vector<int> sum_digits = sumDigits(matrix);
+    for (int i = 0; i < 8; i++)
+    {
+        std::cout << sum_digits[i];
+    }
+    std::cout << std::endl;   
+    auto t1 = std::chrono::high_resolution_clock::now();
+    std::cout << "solved in: " << std::chrono::duration_cast<std::chrono::milliseconds>(t1-t0).count() << " msec" << std::endl;
     return 0;
 }

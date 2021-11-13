@@ -33,7 +33,9 @@ the 20×20 grid?
 answer : 70600674
 */
 
-#include<iostream>
+#include <iostream>
+#include <chrono>
+
 #include <algorithm>
 
  int table[20][20] = {
@@ -85,6 +87,9 @@ long long int biggestProduct()
 
 int main()
 {
+    auto t0 = std::chrono::high_resolution_clock::now();    
     std::cout << biggestProduct() << std::endl;
+    auto t1 = std::chrono::high_resolution_clock::now();
+    std::cout << "solved in: " << std::chrono::duration_cast<std::chrono::milliseconds>(t1-t0).count() << " msec" << std::endl;
     return 0;
 }

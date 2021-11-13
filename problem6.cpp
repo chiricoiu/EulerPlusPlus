@@ -15,7 +15,8 @@ first one hundred natural numbers and the square of the sum.
 answer : 25164150
 */
 
-#include<iostream>
+#include <iostream>
+#include <chrono>
 
 int sumSquares(int n)
 {
@@ -39,6 +40,9 @@ int squareSum(int n)
 
 int main()
 {
+    auto t0 = std::chrono::high_resolution_clock::now();
     std::cout << squareSum(100) - sumSquares(100) << std::endl;
+    auto t1 = std::chrono::high_resolution_clock::now();
+    std::cout << "solved in: " << std::chrono::duration_cast<std::chrono::milliseconds>(t1-t0).count() << " msec" << std::endl;
     return 0;
 }

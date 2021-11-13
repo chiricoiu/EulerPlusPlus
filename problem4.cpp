@@ -10,6 +10,8 @@ answer : 906609
 */
 
 #include <iostream>
+#include <chrono>
+
 #include<string>
 
 bool isPalindrome(int number)
@@ -65,6 +67,9 @@ int largestPalindrome(int digits)
 
 int main()
 {
+    auto t0 = std::chrono::high_resolution_clock::now();
     std::cout << largestPalindrome(3) << std::endl;
+    auto t1 = std::chrono::high_resolution_clock::now();
+    std::cout << "solved in: " << std::chrono::duration_cast<std::chrono::milliseconds>(t1-t0).count() << " msec" << std::endl;
     return 0;
 }

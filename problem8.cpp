@@ -9,15 +9,17 @@ What is the value of this product?
 answer : 23514624000
 */
 
-#include<iostream>
-#include<fstream>
-#include<string>
+#include <iostream>
+#include <chrono>
+
+#include <fstream>
+#include <string>
 
 std::string readDigits()
 {
     std::fstream txtfile;
     std::string fileContent;
-    txtfile.open("1000digits.txt", std::ios::in); 
+    txtfile.open("data/problem8/1000digits.txt", std::ios::in); 
     // To open the file in reading mode - ios::in
     // To open the file in writing mode - ios::out
     if (txtfile.is_open())
@@ -53,6 +55,9 @@ long long int adjacentProduct(std::string digitList, int nAdjacent)
 
 int main()
 {   
+    auto t0 = std::chrono::high_resolution_clock::now();
     std::cout << adjacentProduct(readDigits(), 13) << std::endl;
+    auto t1 = std::chrono::high_resolution_clock::now();
+    std::cout << "solved in: " << std::chrono::duration_cast<std::chrono::milliseconds>(t1-t0).count() << " msec" << std::endl;
     return 0;
 }

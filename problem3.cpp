@@ -6,6 +6,7 @@ answer : 6857
 */
 
 #include <iostream>
+#include <chrono>
 
 long long int largestPrimeFactor(long long int n)
 {
@@ -26,6 +27,9 @@ long long int largestPrimeFactor(long long int n)
 
 int main()
 {
+    auto t0 = std::chrono::high_resolution_clock::now();
     std::cout << largestPrimeFactor(600851475143) << std::endl;
+    auto t1 = std::chrono::high_resolution_clock::now();
+    std::cout << "solved in: " << std::chrono::duration_cast<std::chrono::milliseconds>(t1-t0).count() << " msec" << std::endl;
     return 0;
 }

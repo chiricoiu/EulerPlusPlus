@@ -12,6 +12,7 @@ answer : 4613732
 */
 
 #include <iostream>
+#include <chrono>
 
 int sumEvenFibonacci(int n)
 {
@@ -35,6 +36,9 @@ int sumEvenFibonacci(int n)
 
 int main()
 {
-    std::cout << sumEvenFibonacci(4000000) << std::endl;
+    auto t0 = std::chrono::high_resolution_clock::now();
+    std::cout << sumEvenFibonacci(4000000) << std::endl;  
+    auto t1 = std::chrono::high_resolution_clock::now();
+    std::cout << "solved in: " << std::chrono::duration_cast<std::chrono::milliseconds>(t1-t0).count() << " msec" << std::endl;
     return 0;
 }

@@ -6,9 +6,11 @@ Find the sum of all the primes below two million.
 answer : 142913828922
 */
 
-#include<iostream>
-#include<vector>
-#include<numeric>
+#include <iostream>
+#include <chrono>
+
+#include <vector>
+#include <numeric>
 
 std::vector <int> primeList;
 
@@ -42,7 +44,6 @@ long long int sumPrimes(int n)
         if (isPrime(i) == true)
         {
             primeList.push_back(i);
-            std::cout << i << std::endl;
         }
         i += 2;        
     } while (i < n);
@@ -56,7 +57,11 @@ long long int sumPrimes(int n)
 
 int main()
 {
+    auto t0 = std::chrono::high_resolution_clock::now();    
     primeList.push_back(2);
+    std::cout << "Calculating..." << std::endl;
     std::cout << sumPrimes(2000000) << std::endl;
+    auto t1 = std::chrono::high_resolution_clock::now();
+    std::cout << "solved in: " << std::chrono::duration_cast<std::chrono::milliseconds>(t1-t0).count() << " msec" << std::endl;
     return 0;
 }

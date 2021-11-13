@@ -12,9 +12,11 @@ Find the product abc.
 answer : 31875000
 */
 
-#include<iostream>
-#include<cmath>
-#include<vector>
+#include <iostream>
+#include <chrono>
+
+#include <cmath>
+#include <vector>
 
 std::vector <int> pythagoreanTriplet()
 {
@@ -32,11 +34,14 @@ std::vector <int> pythagoreanTriplet()
 
 int main()
 {
+    auto t0 = std::chrono::high_resolution_clock::now();
     std::vector <int> vec = pythagoreanTriplet();
     int result = vec[0]*vec[1]*sqrt(vec[0]*vec[0] + vec[1]*vec[1]);
     std::cout << vec[0] << std::endl;
     std::cout << vec[1] << std::endl;
     std::cout << sqrt(vec[0]*vec[0] + vec[1]*vec[1]) << std::endl;
     std::cout << result << std::endl;
+    auto t1 = std::chrono::high_resolution_clock::now();
+    std::cout << "solved in: " << std::chrono::duration_cast<std::chrono::milliseconds>(t1-t0).count() << " msec" << std::endl;
     return 0;
 }
